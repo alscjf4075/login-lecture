@@ -15,8 +15,10 @@ const id = document.querySelector("#id"),
         fetch("/login", {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
             },
             body: JSON.stringify(req),
-        });
+        })
+          .then((res) => res.json())
+          .then(console.log);
     }
