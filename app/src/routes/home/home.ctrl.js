@@ -15,9 +15,9 @@ const output = {
 };
 
 const process = {
-    login: (req, res) => {
-        const user = new User(req.body);
-        const response = user.login();
+    login: async (req, res) => {  //로그인 함수
+        const user = new User(req.body);    //유저인스턴스를 만들어서
+        const response = await user.login();      //유저에 로그인 매서드를 실행
         return res.json(response);
     },
     register: (req, res) => {

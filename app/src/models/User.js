@@ -7,9 +7,9 @@ class User {
         this.body = body;
     }
     
-    login(){
+    async login(){    //로그인 매서드 실행 , await을 사용하기위해 async사용
         const client = this.body;
-        const {id, psword} = UserStorage.getUserInfo(client.id);
+        const { id,psword } = await UserStorage.getUserInfo(client.id);
 
         if(id){
             if(id === client.id && psword === client.psword) {
