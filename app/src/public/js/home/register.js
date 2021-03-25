@@ -1,4 +1,4 @@
-//회원가입
+//회원가입 백엔드
 "use strict"
 
 const id = document.querySelector("#id"),
@@ -10,11 +10,17 @@ const id = document.querySelector("#id"),
     registerBtn.addEventListener("click", register);
 
     function register(){
+        if(!id.value){
+            return alert("아이디를 입력해주십시오.");       //아이디값이 없을시
+        }
+        if(psword.value !== confirmPsword.value){
+            return alert("비밀번호가 일치하지 않습니다.");      //비밀번호!=비밀번호 확인
+        }
+
         const req = {
             id : id.value,
             name: name.value,
-            psword : psword.value,
-            confirmPsword: confirmPsword.value,
+            psword : psword.value,         
         };
                 
         fetch("/register", {
