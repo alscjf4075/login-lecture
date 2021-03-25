@@ -2,12 +2,12 @@
 
 class UserStorage {
      static #users = {
-        id: ["alscjf4075", "나개발", "김팀장"],
+        id: ["alscjf", "나개발", "김팀장"],
         psword: ["1234", "1234", "123456"],
         name: ["함민철", "나개발", "김팀장"],
     };
 
-    static getUser(...fields){
+    static getUsers(...fields){
         const users = this.#users;
         const newUsers = fields.reduce((newUsers, field) => {
             if(users.hasOwnProperty(field)) {
@@ -17,6 +17,19 @@ class UserStorage {
         }, {});
            return newUsers;
     }
+
+    static getUserInfo(id){
+        const users = this.#users;
+        const idx = users.id.indexOf(id);
+        const usersKeys = Object.keys(users);
+        const userInfo = usersKeys.reduce((newUser, info) => {
+            newUser[info] = users[info][idx];
+            return newUser;
+        }, {});
+
+        return userInfo;
+    }
 }
 
 module.exports = UserStorage;
+
