@@ -20,9 +20,9 @@ const process = {
         const response = await user.login();      //유저에 로그인 매서드를 실행
         return res.json(response);
     },
-    register: (req, res) => {
+    register: async (req, res) => {   //회원가입
         const user = new User(req.body);
-        const response = user.register();
+        const response = await user.register();
         return res.json(response);
     },
 };

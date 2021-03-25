@@ -15,15 +15,27 @@ class UserStorage {
         return userInfo;
     } 
 
-    static getUsers(...fields){
-        // const users = this.#users;
-        const newUsers = fields.reduce((newUsers, field) => {
-            if(users.hasOwnProperty(field)) {
-                newUsers[field] = users[field];
-            }
-            return newUsers;
-        }, {});
-           return newUsers;
+static #getUsers(data, isAll,fields){
+    const users = JSON.parse(data);
+    if (isAll) {
+        return users;
+    }
+    const newUsers = fields.reduce((newUsers, field) => {
+        if(users.hasOwnProperty(field)) {
+            newUsers[field] = users[field];
+        }
+        return newUsers;
+    }, {});
+       return newUsers;
+}
+
+    static getUsers(isAll, ...fields){
+        return fs
+        .readFile("./src/databases/users.json")
+        .then((data) => {   //해당로직이 성공했을때 실행
+            return this.#getUsers(data, isAll, fields); 
+        })     
+        .catch(console.error);   //실패
     }
 
     static getUserInfo(id){
@@ -35,14 +47,19 @@ class UserStorage {
             .catch(console.error);   //실패
     }
 
-    static save(userInfo){
-        // const users = this.#users;
+    static async save(userInfo){
+        const users = await this.getUsers(true);
+        if (users.id.includes(userInfo.id)) {    //user안에 아이디가 존재할때
+            throw "이미 존재하는 아이디 입니다.";
+        }
         users.id.push(userInfo.id);
         users.name.push(userInfo.name);
         users.psword.push(userInfo.psword);
-        return{ success: true};
+        fs.writeFile("./src/databases/users.json", JSON.stringify(users));
+        return {success:true};
+       
     }
-}
+}       //JSON.stringify = 문자열 형태로 바꿔줌
 
 module.exports = UserStorage;
 
