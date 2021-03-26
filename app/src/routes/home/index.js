@@ -13,3 +13,6 @@ router.post("/login", ctrl.process.login);  //로그인 버튼을 누를시 서�
 router.post("/register", ctrl.process.register);
 
 module.exports = router;    //라우터를 사용할수있게 외부로 내보내줌
+
+//get 주소창에 모든 정보를 담아 정보를 전달하는 방식
+//post 내부적으로 정보를 전송하는 방식
