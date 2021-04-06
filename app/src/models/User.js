@@ -10,10 +10,10 @@ class User {
     async login(){    //로그인 매서드 실행 , await을 사용하기위해 async사용
         const client = this.body;
         try{
-            const {id,psword} = await UserStorage.getUserInfo(client.id);
+            const user = await UserStorage.getUserInfo(client.id);
 
-            if(id){
-                if(id === client.id && psword === client.psword) {
+            if(user){
+                if(user.id === client.id && user.psword === client.psword) {
                     return { success: true};
                 }
                 return { success: false, msg: "비밀번호가 틀렸습니다."};

@@ -9,7 +9,6 @@ router.get("/", ctrl.output.home);
 router.get("/login", ctrl.output.login);
 router.get("/register", ctrl.output.register);
 
-
 router.post("/login", ctrl.process.login);  //로그인 버튼을 누를시 서버에 포스트로 로그인 경로 요청 컨트롤러에 프로세스안에있는 로그인 함수가 실행
 router.post("/register", ctrl.process.register);
 
