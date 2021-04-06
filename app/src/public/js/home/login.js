@@ -7,6 +7,12 @@ const id = document.querySelector("#id"),
     loginBtn.addEventListener("click", login);
 
     function login(){
+        if(!id.value){
+            return alert("아이디를 입력해주십시오.");       //아이디값이 없을시
+        }
+        if(!psword.value){
+            return alert("비밀번호를 입력해주십시오.");      //비밀번호!=비밀번호 확인
+        }
         const req = {
             id : id.value,
             psword : psword.value,
@@ -24,6 +30,7 @@ const id = document.querySelector("#id"),
               if(res.success){
                   location.href = "/";
               } else{
+                  if(res.err) return alert(res.err);
                   alert(res.msg);
               }
           })

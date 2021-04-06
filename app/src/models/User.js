@@ -20,7 +20,7 @@ class User {
             }
             return { success: false, msg: "존재하지 않는 아이디입니다."};
         } catch(err){
-            return{success: false, msg:err};    //에러 잡았을때
+            return{success: false, err};    //에러 잡았을때
         }
     }
 
@@ -30,7 +30,7 @@ class User {
         const response = await UserStorage.save(client);  //유저스토리지에 세이브메서드를 호출
         return response;
         } catch(err) {       
-          return {success: false, msg: err};
+          return {success: false, err};
         }
     }
 }
